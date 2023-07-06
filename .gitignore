@@ -2,5 +2,5 @@
 .vs/
 .vscode/
 
-*.exe
-*.json
+*.exe -r
+*.json -r
