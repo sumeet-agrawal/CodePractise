@@ -1,10 +1,6 @@
 #include <iostream>
+#include "constants.hpp"
 
-double calc(double t, double h)
-{
-    double g = 9.8;
-    return h - (g*t*t)/2.0;
-}
 double readHeight()
 {
     double h{};
@@ -19,18 +15,21 @@ void printAns(double t, double h)
     else
         std::cout<<"At "<<t<<" seconds, the ball is on the ground.\n";
 }
-void calcAndPrint(double h, double t)
+
+void calcAndPrint(double h)
 {
-    printAns(t,calc(t,h));
+    double r{h}, t{};
+    while(r>0)
+    {
+        r = h - (myConstants::gravity*t*t)/2.0;
+        printAns(t, r);
+        t++;
+    }
 }
+
 int main()
 {
     double h{readHeight()};
-    calcAndPrint(h,0);
-    calcAndPrint(h,1);
-    calcAndPrint(h,2);
-    calcAndPrint(h,3);
-    calcAndPrint(h,4);
-    calcAndPrint(h,5);
+    calcAndPrint(h);
     return 0;
 }
