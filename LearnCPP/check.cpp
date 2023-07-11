@@ -1,14 +1,5 @@
-#include <iostream>
-#include <string>
-
 int main()
 {
-  std::string str{ "I saw a red car yesterday." };
-
-  auto pos = str.find("red");
-  str.replace(pos, 3, "blue");
-
-  std::cout << str << '\n'; // I saw a blue car yesterday.
-
-  return 0;
+    int array[1000000]; // allocate 1 million integers (probably 4MB of memory)
+    return 0;
 }
