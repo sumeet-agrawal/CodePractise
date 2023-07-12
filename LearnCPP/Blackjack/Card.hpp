@@ -1,9 +1,10 @@
-#ifndef CARDS_CONSTANTS
-#define CARDS_CONSTANTS
+#ifndef PLAYING_CARD
+#define PLAYING_CARD
 
-namespace Cards
+class Card
 {
-    enum class ranks
+public:
+    enum Rank
     {
           two
         , three
@@ -21,8 +22,7 @@ namespace Cards
 
         , max_ranks
     };
-
-    enum class suits
+    enum Suit
     {
           clubs
         , diamonds
@@ -32,16 +32,18 @@ namespace Cards
         , max_suits
     };
 
-    enum class BlackJackResult
-    {
-          player_win
-        , dealer_win
-        , tie
-    };
+    Card() = default;
+    Card(Rank rank, Suit suit)
+        : m_rank{rank}
+        , m_suit{suit}
+    {}
 
-    constexpr int g_maxScore{21};
-    constexpr int g_minDealerScore{17};
-    constexpr int g_decreaseAceScore{10};
-}
+    void print() const;
+    int value() const;
+    Rank rank() const;
+private:
+    Rank m_rank{};
+    Suit m_suit{};
+};
 
 #endif
