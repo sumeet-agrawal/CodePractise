@@ -15,19 +15,16 @@ int main()
         mp[str[en]]--;
         if(!mp[str[en]])
             cnt--;
-        if(!cnt)
+        while(!cnt)
         {
-            while(!cnt)
-            {
-                if(en-st+1 < ans)
-                    ans = en-st+1,
-                    ans_st = st;
-                
-                mp[str[st]]++;
-                if(mp[str[st]]==1)
-                    cnt++;
-                st++;
-            }
+            if(en-st+1 < ans)
+                ans = en-st+1,
+                ans_st = st;
+            
+            mp[str[st]]++;
+            if(mp[str[st]]==1)
+                cnt++;
+            st++;
         }
         en++;
     }
