@@ -35,8 +35,7 @@ int largestRegion(std::vector<std::vector<int>>& M)
         {
             if(M[i][j] != 1)
                 continue;
-            int cnt{countdfs(M, dir, i, j)};
-            ans = std::max(ans, cnt);
+            ans = std::max(ans, countdfs(M, dir, i, j));
         }
     }
     return ans;
