@@ -50,7 +50,7 @@ void Board::printEmptyLines(int count) const
         std::cout<<'\n';
 }
 
-Point Point::getAdjacentPoint(Direction dir)
+Point Point::getAdjacentPoint(const Direction& dir)
 {
     switch(dir.getType())
     {

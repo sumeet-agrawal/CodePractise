@@ -24,10 +24,7 @@ public:
 		// Now initialize our array from the list
 		int count{ 0 };
 		for (auto element : list)
-		{
-			m_data[count] = element;
-			++count;
-		}
+			m_data[count++] = element;
 	}
 
 	~IntArray()
