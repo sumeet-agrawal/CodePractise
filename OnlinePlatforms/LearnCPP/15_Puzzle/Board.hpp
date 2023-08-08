@@ -9,7 +9,7 @@ struct Point
 {
     int m_x{};
     int m_y{};
-    Point getAdjacentPoint(Direction);
+    Point getAdjacentPoint(const Direction&);
     bool operator==(const Point& p) { return m_x==p.m_x && m_y==p.m_y;}
     bool operator!=(const Point& p) { return !(*this==p);}
 };

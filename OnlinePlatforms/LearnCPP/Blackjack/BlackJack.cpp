@@ -22,10 +22,8 @@ int BlackJack::playerPlay()
         std::cout<<"Current Score: "<<m_player.score()<<". Play h or s : ";
         std::cin>>play;
         if(play=='h')
-        {
             if(m_player.drawCard(m_deck))
                 aceCntr++;
-        }
         if(m_player.score()>g_maximumScore && aceCntr)
             m_player.updateScore(m_player.score()-g_decreaseAceScore),
             aceCntr--;
