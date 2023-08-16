@@ -1,0 +1,16 @@
+Build a spell-checking system for a text editor which suggests corrections for misspelled words in the document based on the words in the dictionary. The dictionary will contain only alphabetical characters.
+
+ 
+
+Suggestion should be a word from the dictionary which can be derived with fewest number of operations on the misspelled word.
+Transformations allowed on misspelled word are insertion, deletion or substitution of one character at a time.
+Functionality to build:
+addToDictionary(word) : Add the given word to the dictionary.
+spellCheck(text) : Accepts a list of words in a document and validates them providing alternatives for misspelled word 
+                   from the dictionary such that the alternative is derived by least number of transformations.
+Example:
+Text: “calender”
+Dictionary: “calendar”, “cylinder”
+> "calendar" requires one operation (substituting "e" with "a")
+>"cylinder" requires two operations (substituting "a" with "y", substituting “e” with “i”)
+Hence spellCheck should return “calender” ->”calendar” as it requires minimum number of operations which is 1 for correcting the input text.
