@@ -3,10 +3,8 @@
 #include <thread>
 #include <mutex>
 #include <random>
-#include <ctime>
 #include <chrono>
-#include <Windows.h>
-#include <cmath>
+#include <condition_variable>
 
 const int top = 17;
 const int bottom = -3;
@@ -75,7 +73,7 @@ public:
 	}
 	void moveToFloor(int floor)
 	{
-		Sleep(std::abs(cur_floor - floor) * 1000);
+		std::this_thread::sleep_for(std::chrono::milliseconds(std::abs(cur_floor - floor) * 1000));
 		std::cout << std::this_thread::get_id() << " Arrived on floor " << floor << ". Going " << (dir == Direction::UP ? "up" : "down") << "\n";
 		cur_floor = floor;
 		switch (dir)
@@ -155,35 +153,35 @@ int main()
 	std::thread t1([&lift]() {
 		for (int i{ 0 }; i < 10; i++)
 		{
-			Sleep(500);
+			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			lift.pressFrom(getRandom(), static_cast<Elevator::Direction>(getRandom(0, 1)));
 		}
 		});
 	std::thread t2([&lift]() {
 		for (int i{ 0 }; i < 10; i++)
 		{
-			Sleep(1500);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 			lift.pressFrom(getRandom(), static_cast<Elevator::Direction>(getRandom(0, 1)));
 		}
 		});
 	std::thread t3([&lift]() {
 		for (int i{ 0 }; i < 10; i++)
 		{
-			Sleep(2500);
+			std::this_thread::sleep_for(std::chrono::milliseconds(2500));
 			lift.pressFrom(getRandom(), static_cast<Elevator::Direction>(getRandom(0, 1)));
 		}
 		});
 	std::thread t4([&lift]() {
 		for (int i{ 0 }; i < 10; i++)
 		{
-			Sleep(3500);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 			lift.pressFrom(getRandom(), static_cast<Elevator::Direction>(getRandom(0, 1)));
 		}
 		});
 	std::thread t5([&lift]() {
 		for (int i{ 0 }; i < 10; i++)
 		{
-			Sleep(4500);
+			std::this_thread::sleep_for(std::chrono::milliseconds(4500));
 			lift.pressFrom(getRandom(), static_cast<Elevator::Direction>(getRandom(0, 1)));
 		}
 		});
