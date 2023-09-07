@@ -3,6 +3,7 @@
 #include <list>
 #include <memory>
 #include <mutex>
+#include <condition_variable>
 
 class Database
 {
@@ -10,7 +11,7 @@ private:
     int connection{ 0 };
 public:
     Database()
-        : connection(1)
+        : connection{1}
     {}
     ~Database()
     {
@@ -34,9 +35,8 @@ private:
     Database* db{ nullptr };
     std::mutex mt;
     std::condition_variable cv;
-    bool isConnected{ true };
+    bool isConnected{ false };
 
-    static ObjectPool* instance;
     ObjectPool() {}
 public:
     ~ObjectPool()
@@ -44,23 +44,16 @@ public:
         std::cout << "Destroying pool\n";
         delete db;
         db = nullptr;
-        instance = nullptr;
     }
     static ObjectPool* getInstance()
     {
-        if (!instance)
-        {
-            instance = new ObjectPool;
-        }
+        static ObjectPool* instance = new ObjectPool();
         return instance;
     }
     Database* getConnection()
     {
         std::unique_lock<std::mutex> lock(mt);
-        while (!isConnected)
-        {
-            cv.wait(lock);
-        }
+        cv.wait(lock, [&](){return !isConnected;});
         if (!db)
             db = new Database;
         isConnected = true;
@@ -72,11 +65,10 @@ public:
         cv.notify_all();
     }
 };
-ObjectPool* ObjectPool::instance = nullptr;
 int main()
 {
-    std::unique_ptr<ObjectPool> pool{ ObjectPool::getInstance() };
-    Database* db = pool->getConnection();
+    Database* db = ObjectPool::getInstance()->getConnection();
     db->executeQuery("Insert into bookmarks where url = '' && user_id = ''");
+    ObjectPool::getInstance()->returnResource(db);
     return 0;
 }
