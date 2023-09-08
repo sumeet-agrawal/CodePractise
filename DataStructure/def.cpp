@@ -2,16 +2,19 @@
 #include <unordered_map>
 
 using namespace std;
-
-class Trie
+struct abc
 {
-private:
-    unordered_map<int, Trie*> m_nodes;
 
+};
+class def
+{
+    void abc(){}
+    void efg(){}
+    void kadfsa(){}
 };
 
 int main()
 {
-    
+    cout<<sizeof(def)<<"\n";
     return 0;
 }
