@@ -77,6 +77,23 @@ public:
         return out; 
     }
     int currentSize()  const { return cur;}
+    int sz() const { return size;}
+    void resize(int a)
+    {
+        if(a>size)
+        {
+            T* temp = new T[a];
+            for(int i{};i<cur;i++)
+                temp[i] = arr[i];
+            
+            delete[] arr;
+            arr = temp;
+        }
+        else if(a<cur)
+            cur = a;
+    }
+    T* begin()  { return arr;}
+    T* end()    { return arr+cur;}
 };
 
 int main()
@@ -86,6 +103,16 @@ int main()
     vec[3] = 100;
     cout<<vec<<"\n";
     Vector<string> arr{"Sumeet", "Mohit", "Sunil", "Sunita", "Sheetal"};
+    cout<<arr.sz()<<" "<<arr.currentSize()<<"\n";
+    arr.push_back("Jayesh");
+    arr.resize(3);
+    cout<<arr.sz()<<" "<<arr.currentSize()<<"\n";
     cout<<arr<<"\n";
+    for(auto itr = arr.begin();itr != arr.end();itr++)
+        cout<<*itr<<" ";
+    cout<<"\n";
+    for(auto &x: arr)
+        cout<<x<<" ";
+    cout<<"\n";
     return 0;
 }
