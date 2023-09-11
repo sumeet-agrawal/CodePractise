@@ -1,17 +1,18 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <limits>
+#include <sstream>
 
 using namespace std;
 
-vector<string> split_string(string);
+vector<string> split_string(const string&);
 
 // Complete the arrayManipulation function below.
 long arrayManipulation(int n, vector<vector<int>> queries) {
-    //cout<<"enter"<<endl;
     vector<long> arr(n+2,0);
     long max=0;
-    //cout<<queries.size()<<" "<<arr.size()<<endl;
     for(int i =0;i<queries.size();i++){
-        //cout<<queries[i][0]<<" "<<queries[i][1]<<" "<<queries[i][2]<<endl;
         arr[queries[i][0]]+=queries[i][2];
         arr[queries[i][1]+1]-=queries[i][2];
     }
@@ -25,8 +26,6 @@ long arrayManipulation(int n, vector<vector<int>> queries) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
     string nm_temp;
     getline(cin, nm_temp);
 
@@ -49,38 +48,17 @@ int main()
 
     long result = arrayManipulation(n, queries);
 
-    fout << result << "\n";
-
-    fout.close();
+    cout << result << "\n";
 
     return 0;
 }
 
-vector<string> split_string(string input_string) {
-    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-        return x == y and x == ' ';
-    });
-
-    input_string.erase(new_end, input_string.end());
-
-    while (input_string[input_string.length() - 1] == ' ') {
-        input_string.pop_back();
-    }
-
-    vector<string> splits;
-    char delimiter = ' ';
-
-    size_t i = 0;
-    size_t pos = input_string.find(delimiter);
-
-    while (pos != string::npos) {
-        splits.push_back(input_string.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input_string.find(delimiter, i);
-    }
-
-    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-    return splits;
+vector<string> split_string(const string& str)
+{
+    stringstream s(str);
+    vector<string> ans{};
+    string token{};
+    while(s>>token)
+        ans.push_back(token);
+    return ans;
 }

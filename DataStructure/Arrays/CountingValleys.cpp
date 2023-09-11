@@ -1,16 +1,17 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <iostream>
 
 using namespace std;
 
 // Complete the countingValleys function below.
-int countingValleys(int n, string s) {
+int countingValleys(string_view s) {
     int count =0,ans=0;
-    for(int i =0;i<s.length();i++){
-        if(s[i]=='D')
+    for(auto x: s){
+        if(x=='D')
             count--;
         else
             count++;
-        if(count==0 && s[i]=='U')
+        if(count==0 && x=='U')
             ans++;
     }
     return ans;
@@ -18,20 +19,12 @@ int countingValleys(int n, string s) {
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
     string s;
     getline(cin, s);
 
-    int result = countingValleys(n, s);
+    int result = countingValleys(s);
 
-    fout << result << "\n";
-
-    fout.close();
+    cout << result << "\n";
 
     return 0;
 }

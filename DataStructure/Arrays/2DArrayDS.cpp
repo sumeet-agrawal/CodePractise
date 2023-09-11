@@ -1,42 +1,34 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <numeric>
+#include <limits>
 
 using namespace std;
 
 // Complete the hourglassSum function below.
-int hourglassSum(vector<vector<int>> arr) {
-    vector<vector<int>> vec(4);
-    int max = INT_MIN;
-    for(int j=0;j<4;j++){
-        vec[j].resize(4);
-        for(int k =0;k<4;k++){
-            vec[j][k]=arr[j][k]+arr[j][k+1]+arr[j][k+2]+arr[j+1][k+1]+arr[j+2][k]+arr[j+2][k+1]+arr[j+2][k+2];
-            if(vec[j][k]>max)
-                max = vec[j][k];
+int hourglassSum(const vector<vector<int>>& arr) {
+    int ans{INT_MIN};
+    for(int j{};j<4;j++)
+        for(int k{};k<4;k++){
+            int t{arr[j][k]+arr[j][k+1]+arr[j][k+2]+arr[j+1][k+1]+arr[j+2][k]+arr[j+2][k+1]+arr[j+2][k+2]};
+            ans = max(t, ans);
         }
-    }
-    return max;
+    return ans;
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    vector<vector<int>> arr(6);
-    for (int i = 0; i < 6; i++) {
-        arr[i].resize(6);
-
-        for (int j = 0; j < 6; j++) {
+    vector<vector<int>> arr(6, vector<int>(6));
+    for (int i{}; i < 6; i++) {
+        for (int j{}; j < 6; j++)
             cin >> arr[i][j];
-        }
-
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     int result = hourglassSum(arr);
 
-    fout << result << "\n";
-
-    fout.close();
+    cout << result << "\n";
 
     return 0;
 }

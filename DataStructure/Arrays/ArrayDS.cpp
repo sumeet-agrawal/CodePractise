@@ -1,20 +1,30 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <limits>
+#include <sstream>
 
 using namespace std;
 
-vector<string> split_string(string);
+vector<string> split_string(const string& str)
+{
+    stringstream s(str);
+    vector<string> ans{};
+    string token{};
+    while(s>>token)
+        ans.push_back(token);
+    return ans;
+}
 
 // Complete the reverseArray function below.
-vector<int> reverseArray(vector<int> a) {
+vector<int> reverseArray(vector<int>& a) {
     reverse(a.begin(), a.end());
     return a;
-
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
     int arr_count;
     cin >> arr_count;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -24,56 +34,14 @@ int main()
 
     vector<string> arr_temp = split_string(arr_temp_temp);
 
-    vector<int> arr(arr_count);
-
-    for (int i = 0; i < arr_count; i++) {
-        int arr_item = stoi(arr_temp[i]);
-
-        arr[i] = arr_item;
-    }
+    vector<int> arr;
+    for (auto &x: arr_temp)
+        arr.push_back(stoi(x));
 
     vector<int> res = reverseArray(arr);
-
-    for (int i = 0; i < res.size(); i++) {
-        fout << res[i];
-
-        if (i != res.size() - 1) {
-            fout << " ";
-        }
-    }
-
-    fout << "\n";
-
-    fout.close();
+    for (const auto &x: res)
+        cout << x <<" ";
+    cout << "\n";
 
     return 0;
-}
-
-vector<string> split_string(string input_string) {
-    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-        return x == y and x == ' ';
-    });
-
-    input_string.erase(new_end, input_string.end());
-
-    while (input_string[input_string.length() - 1] == ' ') {
-        input_string.pop_back();
-    }
-
-    vector<string> splits;
-    char delimiter = ' ';
-
-    size_t i = 0;
-    size_t pos = input_string.find(delimiter);
-
-    while (pos != string::npos) {
-        splits.push_back(input_string.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input_string.find(delimiter, i);
-    }
-
-    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-    return splits;
 }

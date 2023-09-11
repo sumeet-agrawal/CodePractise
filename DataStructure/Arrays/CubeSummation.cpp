@@ -1,21 +1,19 @@
-#include <cmath>
-#include <cstdio>
 #include <vector>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 
 int main() {
-    int t;cin>>t;
-    for(int i =0;i<t;i++){
-        int n,m;cin>>n>>m;
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m;
+        cin>>n>>m;
         vector<vector<int>> arr;
         for(int j=0;j<m;j++){
-            string str;cin>>str;
-            //cout<<arr.size()<<" "<<str<<endl;
-            if(!str.compare("UPDATE")){
-                //cout<<str<<endl;
+            string str;
+            cin>>str;
+            if(str == "UPDATE"){
                 int x,y,z,w,flag=0;
                 cin>>x>>y>>z>>w;
                 for(int k=0;k<arr.size();k++){
@@ -38,7 +36,7 @@ int main() {
                         sum+=arr[k][3];
                     }
                 }
-                cout<<sum<<endl;
+                cout<<sum<<"\n";
             }
         }
     }

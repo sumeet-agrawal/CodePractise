@@ -3,10 +3,10 @@
 template<typename T>
 class Singleton {
 public:
-    static T& instance()
+    static T* instance()
     {
         static T instance{};
-        return instance;
+        return &instance;
     }
     Singleton(const Singleton&) = delete;
     Singleton& operator= (const Singleton) = delete;
@@ -33,11 +33,11 @@ int main()
     std::cout << "Entering main()" << std::endl;
     {
         auto const& t = Test::instance();
-        t.use();
+        t->use();
     }
     {
         auto const& t = Test::instance();
-        t.use();
+        t->use();
     }
     std::cout << "Leaving main()" << std::endl;
 }
