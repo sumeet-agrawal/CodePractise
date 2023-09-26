@@ -7,4 +7,4 @@ do
     sum=$(( $sum + $temp))
     #echo $i $temp $sum
 done
-printf "%.3f\n" $(echo "$sum/$n" | bc -l)
+LC_NUMERIC="en_US.UTF-8" printf "%.3f\n" $(echo "$sum/$n")
