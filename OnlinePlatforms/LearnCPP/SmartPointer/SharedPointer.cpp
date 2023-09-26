@@ -48,6 +48,23 @@ public:
     }
 };
 
+template <typename T>
+class WeakPtr
+{
+    T* t{};
+public:
+    WeakPtr(SharedPtr& ptr)
+    {
+        t = ptr.t;
+    }
+    WeakPtr& operator=(SharedPtr& ptr)
+    {
+        t = ptr.t;
+        return *this;
+    }
+    ~WeakPtr() = default;
+};
+
 class Resource
 {
 public:

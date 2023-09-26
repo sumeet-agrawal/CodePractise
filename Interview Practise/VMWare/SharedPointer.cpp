@@ -50,7 +50,7 @@ public:
         ++(*cntr);
         return *this;
     }
-    int get() const     { return cntr->get();}
+    int getCount() const     { return cntr->get();}
 };
 
 class Resource
@@ -63,11 +63,11 @@ public:
 int main()
 {
     SharedPtr<Resource> ptr1(new Resource());
-    cout<<"Counter: "<<ptr1.get()<<"\n";
+    cout<<"Counter: "<<ptr1.getCount()<<"\n";
     {
         SharedPtr<Resource> ptr2 = ptr1;
-        cout<<"Counter: "<<ptr2.get()<<"\n";
+        cout<<"Counter: "<<ptr2.getCount()<<"\n";
     }
-    cout<<"Counter: "<<ptr1.get()<<"\n";
+    cout<<"Counter: "<<ptr1.getCount()<<"\n";
     return 0;
 }
