@@ -96,10 +96,7 @@ public:
     void resize(int nSize)
     {
         if(nSize<=capacity)
-        {
-            en = nSize;
             return;
-        }
         T* temp = new T[capacity = nSize];
         memcpy(temp, arr, size()*sizeof(T));
         delete[] arr;
@@ -125,39 +122,12 @@ public:
     }
 };
 
-template <>
-void Vector<string>::push_back(string val)
-{
-    if(en<capacity)
-    {
-        arr[en++] = val;
-        return;
-    }
-    string* temp = new string[capacity *= 2];
-    for(int i{};i<en;i++)
-        temp[i] = arr[i];
-    delete[] arr;
-    arr = temp;
-    arr[en++] = val;
-}
-
 int main()
 {
-    Vector<int> vec{1, 3, 4, 5, 7, 10};
+    Vector<int> vec({1,2,3,4,5});
+    Vector<int> arr(vec);
     cout<<vec<<"\n";
-    vec[3] = 100;
-    cout<<vec<<"\n";
-    Vector<string> arr{"Sumeet", "Mohit", "Sunil", "Sunita", "Sheetal"};
-    cout<<arr.size()<<" "<<arr.memSize()<<"\n";
-    arr.push_back("Jayesh");
-    cout<<arr.size()<<" "<<arr.memSize()<<"\n";
+    arr.push_back(6);
     cout<<arr<<"\n";
-    arr.resize(3);
-    for(auto itr = arr.begin();itr != arr.end();itr++)
-        cout<<*itr<<" ";
-    cout<<"\n";
-    for(auto &x: arr)
-        cout<<x<<" ";
-    cout<<"\n";
     return 0;
 }
